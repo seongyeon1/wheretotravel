@@ -91,9 +91,9 @@
     except:
       break
     if cnt == 10:
-    driver .find_element_by_xpath('//*[@id="content"]/div[6é]/a[3]').click()
-    driver .implicitly_wait (time_to_wait=3)
-    time .sleep(2)
+    driver.find_element_by_xpath('//*[@id="content"]/div[6é]/a[3]').click()
+    driver.implicitly_wait (time_to_wait=3)
+    time.sleep(2)
     cnt = 0
 ```
 
