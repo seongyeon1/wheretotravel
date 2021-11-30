@@ -44,9 +44,70 @@
 - Tour api에서 제공하는 자연, 레포츠 ,인문 역사에 대한 문화시설 크롤링 후 데이터로 사용
 ![image](https://user-images.githubusercontent.com/83098550/143678810-248f2001-fd33-4170-8d8d-38f025be0eff.png)
 
+  URL = ‘https://api.visitkorea.or.kr/search/commonList.do’
+  관광지명 = []
+  지역 = []
+  cnt = 0
+  
+홈페이지 열기
+
+  driver = webdriver.chrome(executable_path=' ./chromedriver')
+  driver.get(url=uRL)
+  driver.implicitly_wait(time_to_wait=3)
+  
+  
+쇼핑, 음식점 카테고리 제거하기
+  
+  driver.find_element_by_xpath('//*[@id="typeid_38"]').click()
+  time.sleep(1)
+  driver.find_element_by_xpath('//*[@id="typeid_39"]').click()
+  driver.implicitly_wait(time_to_wait=3)
+  time.sleep(2)
+  
+  
+자연 먼저 확인하기
+ 
+  driver. find_element_by_xpath(‘//*(@id="selectDiv"]/table/tbody/tr[2]/td/div[1]/span(1)/select(1)/option[2]').click()
+  driver.implicitly_wait(time_to_wait=3)
+  time. sleep(2)
+  
+  
+메뉴 50개씩 보기
+
+  driver.find_element_by_xpath('//*[@id="numofPage"]/option[5]*).click()
+  driver.implicitly_wait(time_to_wait=1)
+  driver.find_element_by_xpath(‘'//*[@id="numOfPageview"]*).click()
+  driver.implicitly_wait(time_to_wait=5)
+  
+  while True:
+    # 페이지 넘어가기 알고리즘
+    try:
+      if cnt >= 1:
+        driver.find_element_by_xpath('//*[@id="content"]/div(6é)/span/a[{}]'.format(cnt)).click()
+        driver.implicitly_wait(time_to_wait=3)
+        time.sleep(2)
+      cnt += 1
+    except:
+      break
+    if cnt == 10:
+    driver .find_element_by_xpath('//*[@id="content"]/div[6é]/a[3]').click()
+    driver .implicitly_wait (time_to_wait=3)
+    time .sleep(2)
+    cnt = 0
+  
+해당 페이지 소스 받아오기
+
+  html = driver.page_source
+  soup = BeautifulSoup(html, ‘html.parser')
+  attraction = soup.select('#listForm > ul > li > a > dl > dt')
+  location = soup.select('#listForm > ul > li > a > dl > dd > strong’)
+  
 1. 비대면
+
 ![image](https://user-images.githubusercontent.com/83098550/143993737-41c93755-4a98-4082-9b9d-a5809eb5a73c.png)
+
 2. 언텍트
+
 ![image](https://user-images.githubusercontent.com/83098550/143993756-36d3c73a-17ff-460d-aa0f-293f6c7b3496.png)
 
 # 정책 제안 및 결론
