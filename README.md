@@ -69,7 +69,7 @@
 ``` PYTHON 
   driver.find_element_by_xpath(‘//*(@id="selectDiv"]/table/tbody/tr[2]/td/div[1]/span(1)/select(1)/option[2]').click()
   driver.implicitly_wait(time_to_wait=3)
-  time. sleep(2)
+  time.sleep(2)
 ```  
   
 메뉴 50개씩 보기
